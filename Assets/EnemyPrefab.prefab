@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8844349062617688482}
   - component: {fileID: 6885578858925904374}
   - component: {fileID: 109067180082250999}
-  - component: {fileID: 5183668071925715413}
   m_Layer: 0
   m_Name: EnemyPrefab
   m_TagString: Enemy
@@ -203,19 +202,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c79018caedad6744806ed291f39b958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.2
---- !u!114 &5183668071925715413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4283298628058701676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 019830b4c04d2944c8ef3ee646998d26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
-  enemiesPerWave: 3
-  timeBetweenWaves: 10
+  moveSpeed: 1

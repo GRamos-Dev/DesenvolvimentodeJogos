@@ -1844,8 +1844,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4283298628058701676, guid: 82b64f26052fff14daabac5122b80c29, type: 3}
+  player: {fileID: 0}
   enemiesPerWave: 99
   timeBetweenWaves: 1
+  spawnRadiusMin: 3
+  spawnRadiusMax: 7
 --- !u!4 &1828571748
 Transform:
   m_ObjectHideFlags: 0
@@ -1856,6 +1859,56 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.3164613, y: 0.63010615, z: 0.018117912}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1854936785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1854936787}
+  - component: {fileID: 1854936786}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1854936786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854936785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019830b4c04d2944c8ef3ee646998d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 4283298628058701676, guid: 82b64f26052fff14daabac5122b80c29, type: 3}
+  player: {fileID: 2046288965}
+  enemiesPerWave: 7
+  timeBetweenWaves: 10
+  spawnRadiusMin: 3
+  spawnRadiusMax: 7
+--- !u!4 &1854936787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854936785}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.16, y: -0.16, z: -0.015998632}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2196,3 +2249,4 @@ SceneRoots:
   - {fileID: 517435980}
   - {fileID: 1147542373}
   - {fileID: 693801289}
+  - {fileID: 1854936787}
