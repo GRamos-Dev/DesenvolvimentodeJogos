@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 54d88869e8180c6498b46ef80da37ff7
+guid: 5104f4053792f5c469874d99efd62c20
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -226958548432851392
-    second: "\xC1rvore Grande Morta - Sprite_0"
+      213: 5109003351221812936
+    second: Fance Igreja - Sprite_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\xC1rvore Grande Morta - Sprite_0"
+      name: Fance Igreja - Sprite_0
       rect:
         serializedVersion: 2
-        x: 87
-        y: 87
-        width: 497
-        height: 475
+        x: 175
+        y: 153
+        width: 332
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 04eebe5176ea9dcf0800000000000000
-      internalID: -226958548432851392
+      spriteID: 8ce3bd1ba73d6e640800000000000000
+      internalID: 5109003351221812936
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\xC1rvore Grande Morta - Sprite_0": -226958548432851392
+      Fance Igreja - Sprite_0: 5109003351221812936
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
