@@ -7,11 +7,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>(); // <- Pega o Animator do Player
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -24,11 +26,21 @@ public class PlayerController : MonoBehaviour
         // Atualiza o parâmetro Speed no Animator
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        // Se quiser guardar última direção para idle de frente/lado/trás
+        // Guarda última direção para idle de frente/lado/trás
         if (movement != Vector2.zero)
         {
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
+        }
+
+        // Inverte o sprite quando andar para a esquerda
+        if (movement.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (movement.x > 0)
+        {
+            spriteRenderer.flipX = false;
         }
     }
 
