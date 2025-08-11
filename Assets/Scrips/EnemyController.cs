@@ -3,6 +3,9 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float moveSpeed = 3f;
+    public float attackDamage = 10f;
+    public float attackCooldown = 1f;
+    private float lastAttackTime;
     private Transform player;
     private Animator animator;
     private bool facingRight = true;  // Inicia olhando para a direita
@@ -11,11 +14,13 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         animator = GetComponent<Animator>();
+        lastAttackTime = -attackCooldown; // Permite atacar imediatamente
+
     }
 
     void Update()
     {
-        if(player != null)
+        if (player != null)
         {
             Vector2 direction = (player.position - transform.position).normalized;
 
@@ -23,9 +28,9 @@ public class EnemyController : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
 
             // Verifica se precisa virar o inimigo
-            if(direction.x > 0 && !facingRight)
+            if (direction.x > 0 && !facingRight)
                 Flip();
-            else if(direction.x < 0 && facingRight)
+            else if (direction.x < 0 && facingRight)
                 Flip();
 
             // Atualiza o parâmetro Speed do Animator para controlar a animação
@@ -52,10 +57,22 @@ public class EnemyController : MonoBehaviour
     // Detecta colisão com a bala
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Bullet"))
+        if (collision.CompareTag("Bullet"))
         {
             TakeDamage();
             Destroy(collision.gameObject); // destrói a bala
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player") && Time.time >= lastAttackTime + attackCooldown)
+        {
+            playerHealt playerHealth = collision.gameObject.GetComponent<playerHealt>();
+            if(playerHealth != null)
+            {
+                playerHealth.TakeDamage(attackDamage);
+                lastAttackTime = Time.time;
+            }   
         }
     }
 }
