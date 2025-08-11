@@ -1,25 +1,19 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerHealt : MonoBehaviour
 {
-    //vida do personagem 
     public float maxHealth = 100f;
     public float currentHealth;
     public Barradevida healthBar;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.ColocarvidaMaxima(maxHealth);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-        public void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         healthBar.AlterarVida(currentHealth);
@@ -32,8 +26,11 @@ public class playerHealt : MonoBehaviour
 
     void Die()
     {
-        // Implemente aqui o que acontece quando o jogador morre
         Debug.Log("Player died!");
-        // Exemplo: Recarregar a cena, mostrar tela de game over, etc.
+        // Carrega o menu principal quando o jogador morre
+        SceneManager.LoadScene("MainMenu");
+        
+        // Reseta o score quando o jogador morre
+        ScoreManager.instance?.ResetScore();
     }
 }
