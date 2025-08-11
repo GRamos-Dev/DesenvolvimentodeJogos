@@ -4107,7 +4107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 6693415808142648493, guid: 67a744de41016ac44a56839f788ed802, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4523,10 +4523,10 @@ GameObject:
   - component: {fileID: 2046288969}
   - component: {fileID: 2046288968}
   - component: {fileID: 2046288967}
-  - component: {fileID: 2046288966}
   - component: {fileID: 2046288970}
   - component: {fileID: 2046288972}
   - component: {fileID: 2046288973}
+  - component: {fileID: 2046288974}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4551,19 +4551,6 @@ Transform:
   - {fileID: 1853401397}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2046288966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046288963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41c6c7dec4a33c64a833ca7af6cfeee1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1
 --- !u!61 &2046288967
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4741,6 +4728,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1112206639}
   bulletPrefab: {fileID: 3800788356782250620, guid: 118a7c3f46e225c4bb714c0398e62996, type: 3}
+--- !u!114 &2046288974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046288963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c6c7dec4a33c64a833ca7af6cfeee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
 --- !u!1 &2075628534
 GameObject:
   m_ObjectHideFlags: 0
