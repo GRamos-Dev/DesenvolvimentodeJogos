@@ -12,13 +12,34 @@ public class EnemySpawner : MonoBehaviour
 
     private int currentWave = 0;
 
+    void Awake()
+    {
+        // Fallback: tenta achar o player por tag se não foi atribuído
+        if (player == null)
+        {
+            var go = GameObject.FindWithTag("Player");
+            if (go != null) player = go.transform;
+        }
+    }
+
     void Start()
     {
         if (player == null)
         {
-            Debug.LogError("EnemySpawner: Player não atribuído!");
-            enabled = false; // Desativa este script para evitar erros
+            Debug.LogWarning("EnemySpawner: Player não atribuído. Vou tentar encontrar quando o Player aparecer.");
+            StartCoroutine(WaitForPlayerThenStart());
             return;
+        }
+        StartCoroutine(SpawnWaves());
+    }
+
+    IEnumerator WaitForPlayerThenStart()
+    {
+        while (player == null)
+        {
+            var go = GameObject.FindWithTag("Player");
+            if (go != null) player = go.transform;
+            yield return null;
         }
         StartCoroutine(SpawnWaves());
     }
@@ -44,13 +65,19 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemyNearPlayer()
     {
-        // Pega uma posição aleatória num círculo ao redor do player, respeitando as distâncias mín e máx
+        if (player == null) return;
+
         Vector2 spawnDirection = Random.insideUnitCircle.normalized;
         float spawnDistance = Random.Range(spawnRadiusMin, spawnRadiusMax);
         Vector2 spawnPos = (Vector2)player.position + spawnDirection * spawnDistance;
 
         Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-
         Debug.Log("Spawn de inimigo perto do player em: " + spawnPos);
+    }
+
+    // Permite setar o player em runtime (se for instanciado depois)
+    public void SetPlayer(Transform t)
+    {
+        player = t;
     }
 }
