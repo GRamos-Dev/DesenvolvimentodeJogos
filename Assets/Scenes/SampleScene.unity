@@ -4130,6 +4130,8 @@ GameObject:
   - component: {fileID: 1854936787}
   - component: {fileID: 1854936786}
   - component: {fileID: 1854936788}
+  - component: {fileID: 1854936790}
+  - component: {fileID: 1854936789}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -4185,6 +4187,42 @@ MonoBehaviour:
   enemyPrefab: {fileID: 4283298628058701676, guid: 3fa6b6cb5cf7b7a48a39b6e08e875fb8, type: 3}
   player: {fileID: 2046288965}
   enemiesPerWave: 1
+  timeBetweenWaves: 10
+  spawnRadiusMin: 3
+  spawnRadiusMax: 7
+--- !u!114 &1854936789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854936785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019830b4c04d2944c8ef3ee646998d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 4283298628058701676, guid: b589cc0792f423247b2d67dbfd05056e, type: 3}
+  player: {fileID: 2046288965}
+  enemiesPerWave: 3
+  timeBetweenWaves: 10
+  spawnRadiusMin: 3
+  spawnRadiusMax: 7
+--- !u!114 &1854936790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854936785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019830b4c04d2944c8ef3ee646998d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 4283298628058701676, guid: 9fb455aaf4504264f8d3b6a12e7e33ad, type: 3}
+  player: {fileID: 2046288965}
+  enemiesPerWave: 3
   timeBetweenWaves: 10
   spawnRadiusMin: 3
   spawnRadiusMax: 7
