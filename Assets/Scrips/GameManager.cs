@@ -3,35 +3,37 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    void Start()
+    public static GameManager instance;
+
+    void Awake()
     {
-        // Garante que o ScoreManager seja atualizado quando uma nova cena é carregada
-        if (ScoreManager.instance != null)
-        {
-            ScoreManager.instance.OnSceneLoaded();
-        }
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    void Update()
+    public void StartGame()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            SceneManager.LoadScene("SampleScene");
-            // Reseta o score quando uma nova partida começa
-            ScoreManager.instance?.ResetScore();
-        }
-    }
-
-    public void IniciaJogo()
-    {
-        SceneManager.LoadScene("SampleScene");
-        // Reseta o score quando uma nova partida começa
-        ScoreManager.instance?.ResetScore();
+        Time.timeScale = 1f;
+        ScoreManager.instance?.ResetScore();
+        // CORRIGIDO: Carrega a cena do jogo, que se chama "SampleScene"
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void QuitGame()
     {
-        Debug.Log("Saindo do jogo...");
-        Application.Quit();
+        Application.Quit();
+    }
+
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }

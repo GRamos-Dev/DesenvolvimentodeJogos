@@ -26,13 +26,6 @@ public class PlayerController : MonoBehaviour
         // Atualiza o parâmetro Speed no Animator
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        // Guarda última direção para idle de frente/lado/trás
-        if (movement != Vector2.zero)
-        {
-            animator.SetFloat("Horizontal", movement.x);
-            animator.SetFloat("Vertical", movement.y);
-        }
-
         // Inverte o sprite quando andar para a esquerda
         if (movement.x < 0)
         {

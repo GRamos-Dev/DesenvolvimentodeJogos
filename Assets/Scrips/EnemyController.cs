@@ -33,8 +33,6 @@ public class EnemyController : MonoBehaviour
             else if (direction.x < 0 && facingRight)
                 Flip();
 
-            // Atualiza o parâmetro Speed do Animator para controlar a animação
-            animator.SetFloat("Speed", direction.magnitude);
         }
     }
 
