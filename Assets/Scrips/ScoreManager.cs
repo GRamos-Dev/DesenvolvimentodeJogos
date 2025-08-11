@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-    public Text scoreText;
+    public TextMeshProUGUI scoreText; // Agora usando TMP
     private int score = 0;
 
     void Awake()
@@ -20,6 +20,21 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        FindScoreText();
+        UpdateScoreUI();
+    }
+
+    void FindScoreText()
+    {
+        // Se não foi atribuído no Inspector, tenta encontrar
+        if (scoreText == null)
+        {
+            scoreText = GameObject.Find("TMPScoreText")?.GetComponent<TextMeshProUGUI>();
+        }
+    }
+
     public void AddScore(int points)
     {
         score += points;
@@ -28,10 +43,8 @@ public class ScoreManager : MonoBehaviour
 
     void UpdateScoreUI()
     {
-        if (scoreText != null)
-        {
-            scoreText.text = "Score: " + score;
-        }
+        if (scoreText == null) FindScoreText();
+        if (scoreText != null) scoreText.text = $"Score: {score}";
     }
 
     public void ResetScore()
@@ -40,14 +53,10 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreUI();
     }
 
-    // Chamar quando uma nova cena é carregada para encontrar a nova UI de score
+    // Chamado quando uma nova cena é carregada
     public void OnSceneLoaded()
     {
-        GameObject scoreTextObj = GameObject.FindGameObjectWithTag("ScoreText");
-        if (scoreTextObj != null)
-        {
-            scoreText = scoreTextObj.GetComponent<Text>();
-            UpdateScoreUI();
-        }
+        FindScoreText();
+        UpdateScoreUI();
     }
 }
