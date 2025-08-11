@@ -25,4 +25,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
+    public void QuitGame()
+    {
+        Debug.Log("Saindo do jogo...");
+        Application.Quit();
+    }
+
 }
