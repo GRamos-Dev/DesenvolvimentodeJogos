@@ -64,20 +64,19 @@ public class playerHealt : MonoBehaviour
     // Método para voltar ao menu (será chamado pelo botão)
     public void ReturnToMenu()
     {
-        // 1. Retorna o tempo ao normal
-        Time.timeScale = 1f;
-
-        // 2. Destrói os objetos persistentes que não queremos manter no menu
-        if (ScoreManager.instance != null)
+    // 1. Reset time scale
+    Time.timeScale = 1f;
+    
+    // 2. Destroi todos os objetos persistentes
+    foreach (var obj in FindObjectsOfType<GameObject>())
+    {
+        if (obj.scene.buildIndex == -1) // Objetos DontDestroyOnLoad
         {
-            Destroy(ScoreManager.instance.gameObject);
+            Destroy(obj);
         }
-        if (GameManager.instance != null)
-        {
-            Destroy(GameManager.instance.gameObject);
-        }
-
-        // 3. Carrega o menu principal
-        SceneManager.LoadScene("MainMenu");
+    }
+    
+    // 3. Carrega o menu
+    SceneManager.LoadScene("MainMenu");
     }
 }

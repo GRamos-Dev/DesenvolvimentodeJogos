@@ -190,7 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6038b0e97add44ea64a53f7209c914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 1
+  scoreValue: 10
 --- !u!114 &109067180082250999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c79018caedad6744806ed291f39b958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2.1
+  moveSpeed: 1.6
   attackDamage: 10
   attackCooldown: 1

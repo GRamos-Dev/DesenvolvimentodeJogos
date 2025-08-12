@@ -1178,6 +1178,7 @@ GameObject:
   - component: {fileID: 418299840}
   - component: {fileID: 418299839}
   - component: {fileID: 418299838}
+  - component: {fileID: 418299841}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -1248,19 +1249,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 418299839}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 163092978}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: LoadMainMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &418299839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1299,6 +1288,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418299836}
   m_CullTransparentMesh: 1
+--- !u!114 &418299841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418299836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ad635ac9c20ff4086a7281302d0878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &433186055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,7 +1751,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.18823531, g: 0.1254902, b: 0.11764707, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2305,7 +2306,7 @@ RectTransform:
   m_GameObject: {fileID: 682070056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.025, y: 1.0125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1495603648}
@@ -3831,7 +3832,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -4729,14 +4730,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828571746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 019830b4c04d2944c8ef3ee646998d26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4283298628058701676, guid: 82b64f26052fff14daabac5122b80c29, type: 3}
   player: {fileID: 0}
-  enemiesPerWave: 99
+  enemiesPerWave: 10
   timeBetweenWaves: 1
   spawnRadiusMin: 3
   spawnRadiusMax: 7
@@ -5012,7 +5013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4283298628058701676, guid: 82b64f26052fff14daabac5122b80c29, type: 3}
   player: {fileID: 2046288965}
-  enemiesPerWave: 7
+  enemiesPerWave: 10
   timeBetweenWaves: 10
   spawnRadiusMin: 3
   spawnRadiusMax: 7
@@ -5045,8 +5046,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4283298628058701676, guid: 3fa6b6cb5cf7b7a48a39b6e08e875fb8, type: 3}
   player: {fileID: 2046288965}
-  enemiesPerWave: 1
-  timeBetweenWaves: 10
+  enemiesPerWave: 3
+  timeBetweenWaves: 20
   spawnRadiusMin: 3
   spawnRadiusMax: 7
 --- !u!114 &1854936789
@@ -5063,10 +5064,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4283298628058701676, guid: b589cc0792f423247b2d67dbfd05056e, type: 3}
   player: {fileID: 2046288965}
-  enemiesPerWave: 3
-  timeBetweenWaves: 10
+  enemiesPerWave: 2
+  timeBetweenWaves: 13
   spawnRadiusMin: 3
-  spawnRadiusMax: 7
+  spawnRadiusMax: 6.92
 --- !u!114 &1854936790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5082,7 +5083,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 4283298628058701676, guid: 9fb455aaf4504264f8d3b6a12e7e33ad, type: 3}
   player: {fileID: 2046288965}
   enemiesPerWave: 3
-  timeBetweenWaves: 10
+  timeBetweenWaves: 9
   spawnRadiusMin: 3
   spawnRadiusMax: 7
 --- !u!1 &1875923537
@@ -5807,7 +5808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c387a6856df8d45a4ad8afc4032a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 100
   healthBar: {fileID: 4228944685722488606}
   gameOverPanel: {fileID: 1495603644}
 --- !u!1 &2075628534
