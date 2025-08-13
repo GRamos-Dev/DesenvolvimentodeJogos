@@ -1,83 +1,141 @@
-using System.Collections;
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;    // Prefab do inimigo
-    public Transform player;          // Referência ao jogador
-    public int enemiesPerWave = 3;    // Quantidade de inimigos por onda
-    public float timeBetweenWaves = 10f;  // Tempo entre ondas
-    public float spawnRadiusMin = 3f;     // Distância mínima do player para spawn
-    public float spawnRadiusMax = 7f;     // Distância máxima do player para spawn
+    [Header("Configuração dos inimigos")]
+    public GameObject[] enemyPrefabs;
+    public Transform[] spawnPoints;
+
+    [Header("Configuração das waves")]
+    public int enemiesPerWave = 5;
+    public float timeBetweenWaves = 3f;
+
+    [Header("UI")]
+    public TextMeshProUGUI waveText;       // Texto da wave
+    public TextMeshProUGUI waveCompleteText; // Texto de "Wave Concluída"
+    private CanvasGroup waveCanvasGroup;
+    private CanvasGroup waveCompleteCanvasGroup;
 
     private int currentWave = 0;
-
-    void Awake()
-    {
-        // Fallback: tenta achar o player por tag se não foi atribuído
-        if (player == null)
-        {
-            var go = GameObject.FindWithTag("Player");
-            if (go != null) player = go.transform;
-        }
-    }
+    private int enemiesAlive = 0;
 
     void Start()
     {
-        if (player == null)
+        if (waveText != null)
         {
-            Debug.LogWarning("EnemySpawner: Player não atribuído. Vou tentar encontrar quando o Player aparecer.");
-            StartCoroutine(WaitForPlayerThenStart());
-            return;
+            waveCanvasGroup = waveText.GetComponent<CanvasGroup>();
+            if (waveCanvasGroup == null)
+                waveCanvasGroup = waveText.gameObject.AddComponent<CanvasGroup>();
+            waveCanvasGroup.alpha = 0;
         }
-        StartCoroutine(SpawnWaves());
+
+        if (waveCompleteText != null)
+        {
+            waveCompleteCanvasGroup = waveCompleteText.GetComponent<CanvasGroup>();
+            if (waveCompleteCanvasGroup == null)
+                waveCompleteCanvasGroup = waveCompleteText.gameObject.AddComponent<CanvasGroup>();
+            waveCompleteCanvasGroup.alpha = 0;
+        }
+
+        StartCoroutine(StartNextWave());
     }
 
-    IEnumerator WaitForPlayerThenStart()
+    IEnumerator StartNextWave()
     {
-        while (player == null)
+        currentWave++;
+        ShowWaveUI();
+
+        yield return new WaitForSeconds(1f);
+
+        enemiesAlive = enemiesPerWave;
+        for (int i = 0; i < enemiesPerWave; i++)
         {
-            var go = GameObject.FindWithTag("Player");
-            if (go != null) player = go.transform;
+            SpawnEnemy();
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        enemiesPerWave += 10;
+    }
+
+    void SpawnEnemy()
+    {
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+        Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+    }
+
+    public void OnEnemyKilled()
+    {
+        enemiesAlive--;
+        if (enemiesAlive <= 0)
+        {
+            // Mostra "Wave Concluída" antes da próxima wave
+            if (waveCompleteText != null)
+                StartCoroutine(ShowWaveCompleteUI());
+
+            StartCoroutine(StartNextWave());
+        }
+    }
+
+    void ShowWaveUI()
+    {
+        if (waveText != null && waveCanvasGroup != null)
+        {
+            waveText.text = "Wave " + currentWave;
+            StartCoroutine(FadeAndAnimateWaveText(waveText, waveCanvasGroup));
+        }
+    }
+
+    IEnumerator ShowWaveCompleteUI()
+    {
+        waveCompleteText.text = "Wave Concluída!";
+        yield return StartCoroutine(FadeAndAnimateWaveText(waveCompleteText, waveCompleteCanvasGroup));
+    }
+
+    IEnumerator FadeAndAnimateWaveText(TextMeshProUGUI textObj, CanvasGroup canvasGroup)
+    {
+        float fadeDuration = 1.5f;
+        float displayTime = 3f;
+        float moveDistance = 1f;
+
+        Vector3 originalPos = textObj.rectTransform.localPosition;
+
+        // Fade-in + subida temporária + zoom
+        float t = 0;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(0, 1, t / fadeDuration);
+            canvasGroup.alpha = alpha;
+            textObj.rectTransform.localPosition = originalPos + new Vector3(0, moveDistance * (t / fadeDuration), 0);
+            textObj.rectTransform.localScale = Vector3.Lerp(Vector3.one * 0.8f, Vector3.one, t / fadeDuration);
             yield return null;
         }
-        StartCoroutine(SpawnWaves());
-    }
 
-    IEnumerator SpawnWaves()
-    {
-        while (true)
+        canvasGroup.alpha = 1;
+        textObj.rectTransform.localPosition = originalPos + new Vector3(0, moveDistance, 0);
+        textObj.rectTransform.localScale = Vector3.one;
+
+        // Mantém visível
+        yield return new WaitForSeconds(displayTime);
+
+        // Fade-out + pequena subida extra temporária
+        t = 0;
+        Vector3 fadeOutStart = textObj.rectTransform.localPosition;
+        Vector3 fadeOutEnd = fadeOutStart + new Vector3(0, 20f, 0);
+        while (t < fadeDuration)
         {
-            currentWave++;
-            int enemiesToSpawn = enemiesPerWave + currentWave; // aumenta inimigos a cada wave
-
-            Debug.Log("Iniciando wave " + currentWave);
-
-            for (int i = 0; i < enemiesToSpawn; i++)
-            {
-                SpawnEnemyNearPlayer();
-                yield return new WaitForSeconds(1f); // espaçamento entre spawns
-            }
-
-            yield return new WaitForSeconds(timeBetweenWaves);
+            t += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(1, 0, t / fadeDuration);
+            textObj.rectTransform.localPosition = Vector3.Lerp(fadeOutStart, fadeOutEnd, t / fadeDuration);
+            yield return null;
         }
-    }
 
-    void SpawnEnemyNearPlayer()
-    {
-        if (player == null) return;
-
-        Vector2 spawnDirection = Random.insideUnitCircle.normalized;
-        float spawnDistance = Random.Range(spawnRadiusMin, spawnRadiusMax);
-        Vector2 spawnPos = (Vector2)player.position + spawnDirection * spawnDistance;
-
-        Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-        Debug.Log("Spawn de inimigo perto do player em: " + spawnPos);
-    }
-
-    // Permite setar o player em runtime (se for instanciado depois)
-    public void SetPlayer(Transform t)
-    {
-        player = t;
+        // Resetar para posição original
+        canvasGroup.alpha = 0;
+        textObj.rectTransform.localPosition = originalPos;
+        textObj.rectTransform.localScale = Vector3.one;
     }
 }

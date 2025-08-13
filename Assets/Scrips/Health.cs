@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth = 3;
     private int currentHealth;
-    public int scoreValue = 10; // Pontos que o jogador ganha ao matar este inimigo
+    public int scoreValue = 10;
 
     void Start()
     {
@@ -25,8 +25,15 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Debug.Log("Inimigo morreu!");
-        // Notifica o ScoreManager para adicionar pontos
         ScoreManager.instance?.AddScore(scoreValue);
+
+        // Aqui avisa o EnemySpawner que esse inimigo morreu
+        EnemySpawner spawner = FindObjectOfType<EnemySpawner>();
+        if (spawner != null)
+        {
+            spawner.OnEnemyKilled();
+        }
+
         Destroy(gameObject);
     }
 }
