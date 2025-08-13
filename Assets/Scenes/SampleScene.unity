@@ -1710,7 +1710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshairTexture: {fileID: 2800000, guid: 386aee339521f3541a2fb0ccd56c085b, type: 3}
-  hotSpot: {x: 100, y: 100}
+  hotSpot: {x: 32, y: 32}
   cursorMode: 1
 --- !u!4 &498662141
 Transform:
@@ -6719,7 +6719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.912994, y: -63.25}
+  m_AnchoredPosition: {x: 10.91301, y: -63.25}
   m_SizeDelta: {x: 3.2451, y: 52.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4662484593641618351
